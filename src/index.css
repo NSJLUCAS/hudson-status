@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+/**
+ * 全局样式：Tailwind v4、语义色 token、@theme 映射、基础排版与动画工具类。
+ *
+ * 自定义属性（--app-*，OKLCH：L 明度 / C 色度 / hue 色相）：
+ * - --app-background / --app-foreground：页面背景与主文字色
+ * - --app-card / --app-card-foreground：卡片表面与文字
+ * - --app-popover / --app-popover-foreground：浮层（下拉、气泡）表面与文字
+ * - --app-primary / --app-primary-foreground：主色（品牌/主要按钮）与其上前景
+ * - --app-accent / --app-accent-foreground：强调（悬停、选中）与前景；亮色偏绿、暗色偏蓝灰以区别于 primary
+ * - --app-secondary / --app-secondary-foreground：次级表面与文字
+ * - --app-muted / --app-muted-foreground：弱化背景与辅助文字
+ * - --app-destructive / --app-destructive-foreground：危险操作与前景
+ * - --app-border / --app-input / --app-ring：边框、输入框边框、焦点环
+ * - --app-sidebar-*：侧栏背景/文字/主色/强调/边框/环（与 accent 策略同步）
+ * - --app-chart-1 … --app-chart-5：图表序列色
+ *
+ * :root 定义亮色；html.dark 覆盖为暗色，并设置 --shadow-sm。
+ * @theme inline：把 --app-* 接到 Tailwind --color-*，以及 --radius、字体、accordion keyframes。
+ *
+ * 自定义动画：fade-in、pulse-ring、pulse-dot、scanline、data-flicker、progress、shimmer；
+ * 工具类 .animate-*、.bg-grid-pattern。
+ */
+:root {
+  --app-background: oklch(0.98 0.004 85);
+  --app-foreground: oklch(0.25 0.01 250);
+
+  --app-card: oklch(0.995 0.002 85);
+  --app-card-foreground: oklch(0.25 0.01 250);
+  --app-popover: oklch(0.995 0.002 85);
+  --app-popover-foreground: oklch(0.25 0.01 250);
+
+  --app-primary: oklch(0.58 0.08 165);
+  --app-primary-foreground: oklch(0.98 0.005 165);
+
+  --app-accent: oklch(0.80 0.08 165);
+  --app-accent-foreground: oklch(0.16 0.06 165);
+
+  --app-secondary: oklch(0.92 0.02 165);
+  --app-secondary-foreground: oklch(0.35 0.02 165);
+  --app-muted: oklch(0.92 0.01 85);
+  --app-muted-foreground: oklch(0.50 0.02 250);
+
+  --app-destructive: oklch(0.55 0.15 25);
+  --app-destructive-foreground: oklch(0.98 0 0);
+
+  --app-border: oklch(0.85 0.01 85);
+  --app-input: oklch(0.85 0.01 85);
+  --app-ring: oklch(0.58 0.08 165);
+
+  --app-sidebar: oklch(0.96 0.01 165);
+  --app-sidebar-foreground: oklch(0.25 0.01 250);
+  --app-sidebar-primary: oklch(0.58 0.08 165);
+  --app-sidebar-primary-foreground: oklch(0.98 0.005 165);
+  --app-sidebar-accent: oklch(0.80 0.08 165);
+  --app-sidebar-accent-foreground: oklch(0.16 0.06 165);
+  --app-sidebar-border: oklch(0.85 0.01 85);
+  --app-sidebar-ring: oklch(0.58 0.08 165);
+
+  --app-chart-1: oklch(0.58 0.08 165);
+  --app-chart-2: oklch(0.65 0.08 240);
+  --app-chart-3: oklch(0.70 0.10 50);
+  --app-chart-4: oklch(0.65 0.09 300);
+  --app-chart-5: oklch(0.72 0.08 90);
+}
+
+html.dark {
+  --app-background: oklch(0.15 0.01 250);
+  --app-foreground: oklch(0.92 0.005 250);
+
+  --app-card: oklch(0.22 0.01 250);
+  --app-card-foreground: oklch(0.92 0.005 250);
+  --app-popover: oklch(0.22 0.01 250);
+  --app-popover-foreground: oklch(0.92 0.005 250);
+
+  --app-primary: oklch(0.75 0.10 165);
+  --app-primary-foreground: oklch(0.15 0.02 165);
+
+  --app-accent: oklch(0.42 0.09 250);
+  --app-accent-foreground: oklch(0.95 0.006 250);
+
+  --app-secondary: oklch(0.28 0.02 250);
+  --app-secondary-foreground: oklch(0.92 0.005 250);
+  --app-muted: oklch(0.28 0.01 250);
+  --app-muted-foreground: oklch(0.70 0.01 250);
+
+  --app-destructive: oklch(0.50 0.18 25);
+  --app-destructive-foreground: oklch(0.98 0 0);
+
+  --app-border: oklch(0.32 0.01 250);
+  --app-input: oklch(0.32 0.01 250);
+  --app-ring: oklch(0.75 0.10 165);
+
+  --app-sidebar: oklch(0.18 0.01 250);
+  --app-sidebar-foreground: oklch(0.92 0.005 250);
+  --app-sidebar-primary: oklch(0.75 0.10 165);
+  --app-sidebar-primary-foreground: oklch(0.15 0.02 165);
+  --app-sidebar-accent: oklch(0.42 0.09 250);
+  --app-sidebar-accent-foreground: oklch(0.95 0.006 250);
+  --app-sidebar-border: oklch(0.32 0.01 250);
+  --app-sidebar-ring: oklch(0.75 0.10 165);
+
+  --app-chart-1: oklch(0.75 0.10 165);
+  --app-chart-2: oklch(0.78 0.08 240);
+  --app-chart-3: oklch(0.82 0.10 50);
+  --app-chart-4: oklch(0.78 0.09 300);
+  --app-chart-5: oklch(0.85 0.08 90);
+
+  --shadow-sm: 0 4px 12px -2px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-background: var(--app-background);
+  --color-foreground: var(--app-foreground);
+  --color-card: var(--app-card);
+  --color-card-foreground: var(--app-card-foreground);
+  --color-popover: var(--app-popover);
+  --color-popover-foreground: var(--app-popover-foreground);
+  --color-primary: var(--app-primary);
+  --color-primary-foreground: var(--app-primary-foreground);
+  --color-secondary: var(--app-secondary);
+  --color-secondary-foreground: var(--app-secondary-foreground);
+  --color-muted: var(--app-muted);
+  --color-muted-foreground: var(--app-muted-foreground);
+  --color-accent: var(--app-accent);
+  --color-accent-foreground: var(--app-accent-foreground);
+  --color-destructive: var(--app-destructive);
+  --color-destructive-foreground: var(--app-destructive-foreground);
+  --color-border: var(--app-border);
+  --color-input: var(--app-input);
+  --color-ring: var(--app-ring);
+  --color-sidebar: var(--app-sidebar);
+  --color-sidebar-foreground: var(--app-sidebar-foreground);
+  --color-sidebar-primary: var(--app-sidebar-primary);
+  --color-sidebar-primary-foreground: var(--app-sidebar-primary-foreground);
+  --color-sidebar-accent: var(--app-sidebar-accent);
+  --color-sidebar-accent-foreground: var(--app-sidebar-accent-foreground);
+  --color-sidebar-border: var(--app-sidebar-border);
+  --color-sidebar-ring: var(--app-sidebar-ring);
+  --color-chart-1: var(--app-chart-1);
+  --color-chart-2: var(--app-chart-2);
+  --color-chart-3: var(--app-chart-3);
+  --color-chart-4: var(--app-chart-4);
+  --color-chart-5: var(--app-chart-5);
+
+  --radius: 0.5rem;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --spacing: 0.25rem;
+
+  --font-sans: DM Sans, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (min-width: 640px) { html { font-size: 16.5px; } }
+  @media (min-width: 1024px) { html { font-size: 17.5px; } }
+  @media (min-width: 1280px) { html { font-size: 18px; } }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-synthesis: none;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  80%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes data-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+.animate-data-flicker {
+  animation: data-flicker 3s ease-in-out infinite;
+}
+
+.animate-progress {
+  animation: progress 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}

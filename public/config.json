@@ -1,0 +1,12 @@
+{
+  "site_name": "Hudson Status",
+  "site_logo": "/favicon.svg",
+  "footer": "Powered by NodeGet",
+  "site_tokens": [
+    {
+      "name": "master server node 1",
+      "backend_url": "wss://your-backend.example.com",
+      "token": "YOUR_TOKEN_HERE"
+    }
+  ]
+}
