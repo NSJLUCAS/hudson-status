@@ -4,9 +4,9 @@
   "footer": "Powered by NodeGet",
   "site_tokens": [
     {
-      "name": "master server node 1",
-      "backend_url": "wss://your-backend.example.com",
-      "token": "YOUR_TOKEN_HERE"
+      "name": "HK VPS",
+      "backend_url": "wss://nodeget.xzzh.org",
+      "token": "d5HxN0WuNNVS4JtC:CqUkyHSPLtKU7UuholTwHD5k9jVUeDhB"
     }
   ]
 }
